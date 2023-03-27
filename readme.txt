@@ -25,11 +25,16 @@ DB Tagcloud for Woocommerce is an easy (i.e. automated) solution for creating an
 
 You need to use a shortcode [tagcloud attr="xxx" cols="x"] where xxx - is the name of the attribute and x is the number of columns in the tagcloud. You can find the names of the attributes on the corresponding woocomerce page {yourwebsite}/wp-admin/edit.php?post_type=product&page=product_attributes
 
+If you use TinyMCE editor, there is a button "Tag Cloud" at the end of the 2nd bar that will allow you to insert the shortcode immidiately.
+
 = Why is it so powerful for SEO? =
 
 A tagcloud helps to improve the linking between attribute categories pages of your e-commerce website.
 
 == Changelog ==
+
+= 1.1 =
+* Added the button "Tag Cloud" to the TinyMCE editor.
 
 = 1.0 =
 * Initial release.

@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: DB Tagcloud for Woocommerce
-Plugin URI: http://bisteinoff.com
+Plugin URI: http://seogio.ru
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.0
+Version: 1.1
 Author: Denis Bisteinov
 Author URI: http://seogio.ru
 License: GPL2
@@ -25,18 +25,23 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// Example: [tagcloud attr="color" cols="8"]
+	// Example: [tagcloud attr="color" cols="8"]
 
-class dbTagCloud
+	class dbTagCloud
 
-{
+	{
 
 		function dbTagCloud() {
 
 			if (function_exists ('add_shortcode') )
+			{
 				add_shortcode('tagcloud', array(&$this, 'tag_cloud') );
-
 			}
+
+			add_filter( 'mce_buttons_2', array(&$this, 'mce_buttons') );
+			add_filter( 'mce_external_plugins', array(&$this, 'mce_external_plugins') );
+
+		}
 
 		function tag_cloud($db_attribute) {
 
@@ -67,6 +72,20 @@ class dbTagCloud
 
 			return $db_html;
 
+		}
+
+		function mce_buttons($buttons) {
+			array_push($buttons, "tagcloud");
+			return $buttons;
+		}
+
+		function mce_external_plugins($plugin_array) {
+			if (function_exists (plugins_url) )
+				$plugin_array['db-tagcloud'] = plugins_url ('/db-tagcloud/js/editor_plugin.min.js');
+			else
+				$plugin_array['db-tagcloud'] = get_option('siteurl') . '/wp-content/plugins/db-tagcloud/js/editor_plugin.min.js';
+
+			return $plugin_array;
 		}
 
 	}
