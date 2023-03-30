@@ -33,6 +33,10 @@ A tagcloud helps to improve the linking between attribute categories pages of yo
 
 == Changelog ==
 
+= 1.2 =
+* Added the settings page to the admin panel. 
+* Added the option to change the default number of columns in the shortcode.
+
 = 1.1 =
 * Added the button "Tag Cloud" to the TinyMCE editor.
 

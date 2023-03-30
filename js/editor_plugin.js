@@ -19,10 +19,11 @@
                 ed.addCommand('mceTagCloud',
                     function()
                     {
-                        var content = tinyMCE.activeEditor.selection.getContent({format : 'raw'});
-                        var newcontent = '[tagcloud attr="' + content + '" cols="8"]';
+                        var attr = tinyMCE.activeEditor.selection.getContent({format : 'raw'});
+                        var cols = 8;
+                        var output = '[tagcloud attr="' + attr + '" cols="' + cols + '"]';
             
-                        tinyMCE.activeEditor.selection.setContent(newcontent);
+                        tinyMCE.activeEditor.selection.setContent(output);
                     }
                 );
             

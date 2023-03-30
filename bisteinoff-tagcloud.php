@@ -3,7 +3,7 @@
 Plugin Name: DB Tagcloud for Woocommerce
 Plugin URI: http://seogio.ru
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.1
+Version: 1.2
 Author: Denis Bisteinov
 Author URI: http://seogio.ru
 License: GPL2
@@ -31,23 +31,49 @@ License: GPL2
 
 	{
 
-		function dbTagCloud() {
+		public $baseUrl;
+
+		function pluginUrl()
+		{
+
+			if (function_exists (plugins_url) )
+				$this->baseUrl = plugins_url ('/db-tagcloud/');
+			else
+				$this->baseUrl = get_option('siteurl') . '/wp-content/plugins/db-tagcloud/';
+
+			return $this->baseUrl;
+		}
+
+		function dbTagCloud()
+		{
+
+			add_option('db_tagcloud_cols', '8');
+
 
 			if (function_exists ('add_shortcode') )
 			{
 				add_shortcode('tagcloud', array(&$this, 'tag_cloud') );
-			}
 
-			add_filter( 'mce_buttons_2', array(&$this, 'mce_buttons') );
-			add_filter( 'mce_external_plugins', array(&$this, 'mce_external_plugins') );
+				add_filter( 'mce_buttons_2', array(&$this, 'mce_buttons') );
+				add_filter( 'mce_external_plugins', array(&$this, 'mce_external_plugins') );
+
+				add_action( 'admin_menu', array (&$this, 'admin') );
+				add_action( 'admin_enqueue_scripts', function() {
+								wp_register_style('db-tagcloud-admin', $this->pluginUrl() . 'css/admin.css');
+								wp_enqueue_style( 'db-tagcloud-admin' );
+							},
+							99
+				);
+			}
 
 		}
 
-		function tag_cloud($db_attribute) {
+		function tag_cloud($db_attribute)
+		{
 
 			$db_attribute = shortcode_atts( [
 				'attr' => 'none',
-				'cols' => '8',
+				'cols' => get_option('db_tagcloud_cols'),
 			], $db_attribute );
 
 			$db_attr = $db_attribute['attr'];
@@ -61,7 +87,8 @@ License: GPL2
 				)
 			);
 
-			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			if ( ! empty( $terms ) && ! is_wp_error( $terms ) )
+			{
 
 				$db_html .= "<ul class=\"db-tagcloud db-cols-{$db_cols}\">";
 				foreach ( $terms as $term )
@@ -74,18 +101,45 @@ License: GPL2
 
 		}
 
-		function mce_buttons($buttons) {
+		function mce_buttons($buttons)
+		{
 			array_push($buttons, "tagcloud");
 			return $buttons;
 		}
 
-		function mce_external_plugins($plugin_array) {
-			if (function_exists (plugins_url) )
-				$plugin_array['db-tagcloud'] = plugins_url ('/db-tagcloud/js/editor_plugin.min.js');
-			else
-				$plugin_array['db-tagcloud'] = get_option('siteurl') . '/wp-content/plugins/db-tagcloud/js/editor_plugin.min.js';
+		function mce_external_plugins($plugin_array)
+		{
+			$plugin_array['db-tagcloud'] = $this->pluginUrl() . 'js/editor_plugin.js';
 
 			return $plugin_array;
+		}
+
+		function admin() {
+
+			if ( function_exists('add_menu_page') )
+			{
+
+				$icon = '<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path style="fill:white;" d="M16,7h0a8.0233,8.0233,0,0,1,7.8649,6.4935l.2591,1.346,1.3488.244A5.5019,5.5019,0,0,1,24.5076,26H7.4954a5.5019,5.5019,0,0,1-.9695-10.9165l1.3488-.244.2591-1.346A8.0256,8.0256,0,0,1,16,7m0-2a10.0244,10.0244,0,0,0-9.83,8.1155A7.5019,7.5019,0,0,0,7.4911,28H24.5076a7.5019,7.5019,0,0,0,1.3213-14.8845A10.0229,10.0229,0,0,0,15.9883,5Z" transform="translate(0)"/></svg>';
+
+				add_menu_page(
+					'DB Tag Cloud Settings',
+					'DB Tag Cloud',
+					'manage_options',
+					'db-tagcloud',
+					array (&$this, 'admin_page_callback'),
+					'data:image/svg+xml;base64,' . base64_encode( $icon ),
+					27
+					);
+
+			}
+
+		}
+
+		function admin_page_callback()
+		{
+
+			require_once('bisteinoff-tagcloud-settings.php');
+
 		}
 
 	}
