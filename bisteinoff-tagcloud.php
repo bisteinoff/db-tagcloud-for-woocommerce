@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: DB Tagcloud for Woocommerce
-Plugin URI: http://seogio.ru
+Plugin URI: https://github.com/bisteinoff/db-tagcloud-for-woocommerce
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.2
+Version: 1.2.1
 Author: Denis Bisteinov
-Author URI: http://seogio.ru
+Author URI: https://bisteinoff.com
 License: GPL2
 */
 
@@ -57,6 +57,10 @@ License: GPL2
 				add_filter( 'mce_buttons_2', array(&$this, 'mce_buttons') );
 				add_filter( 'mce_external_plugins', array(&$this, 'mce_external_plugins') );
 
+
+				wp_register_style('db-tagcloud', $this->pluginUrl() . 'css/style.css');
+				wp_enqueue_style( 'db-tagcloud');
+
 				add_action( 'admin_menu', array (&$this, 'admin') );
 				add_action( 'admin_enqueue_scripts', function() {
 								wp_register_style('db-tagcloud-admin', $this->pluginUrl() . 'css/admin.css');
@@ -64,6 +68,7 @@ License: GPL2
 							},
 							99
 				);
+				add_action( 'admin_footer', array (&$this, 'admin_footer_js') );
 			}
 
 		}
@@ -109,7 +114,7 @@ License: GPL2
 
 		function mce_external_plugins($plugin_array)
 		{
-			$plugin_array['db-tagcloud'] = $this->pluginUrl() . 'js/editor_plugin.js';
+			$plugin_array['db-tagcloud'] = $this->pluginUrl() . 'js/editor_plugin.min.js';
 
 			return $plugin_array;
 		}
@@ -140,6 +145,14 @@ License: GPL2
 
 			require_once('bisteinoff-tagcloud-settings.php');
 
+		}
+
+		function admin_footer_js()
+		{
+			$cols = get_option('db_tagcloud_cols'); ?>
+			
+<script type="text/javascript">var dbTagCloudCols = <?php echo $cols; ?></script><?php
+			
 		}
 
 	}

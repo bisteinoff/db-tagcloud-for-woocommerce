@@ -49,9 +49,7 @@
 		
 		<input type="hidden" name="page_options" value="db_tagcloud_cols" />
 		
-		<p class="submit">
-			<input type="submit" name="submit" value="<?php _e('Save Changes') ?>" />
-		</p>
+		<?php submit_button(); ?>
 
 	</form>
 

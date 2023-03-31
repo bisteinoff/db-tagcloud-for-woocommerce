@@ -20,7 +20,7 @@
                     function()
                     {
                         var attr = tinyMCE.activeEditor.selection.getContent({format : 'raw'});
-                        var cols = 8;
+                        var cols = dbTagCloudCols;
                         var output = '[tagcloud attr="' + attr + '" cols="' + cols + '"]';
             
                         tinyMCE.activeEditor.selection.setContent(output);
