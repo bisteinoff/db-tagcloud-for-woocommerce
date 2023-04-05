@@ -33,6 +33,9 @@ A tagcloud helps to improve the linking between attribute categories pages of yo
 
 == Changelog ==
 
+= 1.3 =
+* New styling settings for DB Tagcloud in the admin panel
+
 = 1.2.1 =
 * Added new styling
 

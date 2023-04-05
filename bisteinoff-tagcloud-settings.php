@@ -1,6 +1,8 @@
 <?php // THE SETTINGS PAGE
 
 	$cols = get_option('db_tagcloud_cols');
+	$fontsize =  get_option('db_tagcloud_fontsize');
+	$fontweight =  get_option('db_tagcloud_fontweight');
 
 	if ( isset($_POST['submit']) )
 	{
@@ -12,9 +14,13 @@
 		if ( function_exists('check_admin_referrer') )
 			check_admin_referrer('db_tagcloud_form');
 
-		$cols = $_POST['cols'];
+		$cols = (int)$_POST['cols'];
+		$fontsize = (float)$_POST['fontsize'];
+		$fontweight = (int)$_POST['fontweight'];
 
 		update_option('db_tagcloud_cols', $cols);
+		if ( $fontsize > 0 ) update_option('db_tagcloud_fontsize', $fontsize);
+		if ( $fontsize > 0 ) update_option('db_tagcloud_fontweight', $fontsize);
 
 	}
 
@@ -33,14 +39,38 @@
 		?>
 
 		<table class="form-table">
-			<tr valign="top">
-				<th scope="row" class="db-tgcl-admin-cols-default">
+			<tr valign="top" class="db-tgcl-admin-cols-default">
+				<th scope="row" rowspan="2" width="20%">
 					<?php _e('Default number of columns' , 'dbTagCloud') ?>
 					<div class="td-tgcl-field-description">The default number of columns will appear in the shortcode</div>
 				</th>
-				<td>
+				<td rowspan="2" width="20%">
 					<input type="text" name="cols"
 							size="5" value="<?php echo $cols; ?>" />
+				</td>
+				<th scope="rowgroup" rowspan="2" width="20%">
+					<?php _e('Styling' , 'dbTagCloud') ?>
+					<div class="td-tgcl-field-description">Customization of the appearance of the DB Tagcloud</div>
+				</th>
+				<th scope="col" width="20%">
+					<?php _e('Font Size' , 'dbTagCloud') ?>
+				</th>
+				<th scope="col" width="20%">
+					<?php _e('Font Weight' , 'dbTagCloud') ?>
+				</th>
+			</tr>
+			<tr valign="top" class="db-tgcl-admin-cols-default">
+				<td>
+					<input type="text" name="fontsize"
+							size="5" value="<?php echo $fontsize; ?>" /> px
+				</td>
+				<td>
+					<select type="text" name="fontweight" value="<?php echo $fontweight; ?>">
+						<option value="0"><?php _e('normal' , 'dbTagCloud') ?></option>
+						<option value="1"><?php _e('bold' , 'dbTagCloud') ?></option>
+						<option value="2"><?php _e('italic' , 'dbTagCloud') ?></option>
+						<option value="3"><?php _e('bold italic' , 'dbTagCloud') ?></option>
+					</select>
 				</td>
 			</tr>
 		</table>

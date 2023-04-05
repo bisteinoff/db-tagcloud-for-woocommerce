@@ -3,7 +3,7 @@
 Plugin Name: DB Tagcloud for Woocommerce
 Plugin URI: https://github.com/bisteinoff/db-tagcloud-for-woocommerce
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.2.1
+Version: 1.3
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
@@ -48,6 +48,8 @@ License: GPL2
 		{
 
 			add_option('db_tagcloud_cols', '8');
+			add_option('db_tagcloud_fontsize');
+			add_option('db_tagcloud_fontweight');
 
 
 			if (function_exists ('add_shortcode') )
