@@ -3,7 +3,7 @@
 Plugin Name: DB Tagcloud for Woocommerce
 Plugin URI: https://github.com/bisteinoff/db-tagcloud-for-woocommerce
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.3
+Version: 1.3.1
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
@@ -50,6 +50,7 @@ License: GPL2
 			add_option('db_tagcloud_cols', '8');
 			add_option('db_tagcloud_fontsize');
 			add_option('db_tagcloud_fontweight');
+			add_option('db_tagcloud_borderwidth');
 
 
 			if (function_exists ('add_shortcode') )
@@ -58,14 +59,18 @@ License: GPL2
 
 				add_filter( 'mce_buttons_2', array(&$this, 'mce_buttons') );
 				add_filter( 'mce_external_plugins', array(&$this, 'mce_external_plugins') );
+				add_filter( 'plugin_action_links_db-tagcloud/bisteinoff-tagcloud.php', array(&$this, 'db_settings_link') );
 
 
-				wp_register_style('db-tagcloud', $this->pluginUrl() . 'css/style.css');
+				wp_register_style('db-tagcloud', $this->pluginUrl() . 'css/style.min.css');
 				wp_enqueue_style( 'db-tagcloud');
+
+				wp_register_style('db-tagcloud-custom', $this->pluginUrl() . 'css/custom.min.css');
+				wp_enqueue_style( 'db-tagcloud-custom');
 
 				add_action( 'admin_menu', array (&$this, 'admin') );
 				add_action( 'admin_enqueue_scripts', function() {
-								wp_register_style('db-tagcloud-admin', $this->pluginUrl() . 'css/admin.css');
+								wp_register_style('db-tagcloud-admin', $this->pluginUrl() . 'css/admin.min.css');
 								wp_enqueue_style( 'db-tagcloud-admin' );
 							},
 							99
@@ -146,6 +151,26 @@ License: GPL2
 		{
 
 			require_once('bisteinoff-tagcloud-settings.php');
+
+		}
+
+		function db_settings_link( $links )
+		{
+
+			$url = esc_url ( add_query_arg (
+				'page',
+				'db-tagcloud',
+				get_admin_url() . 'admin.php'
+			) );
+
+			$settings_link = "<a href='$url'>" . __( 'Settings' ) . '</a>';
+
+			array_push(
+				$links,
+				$settings_link
+			);
+
+			return $links;
 
 		}
 
