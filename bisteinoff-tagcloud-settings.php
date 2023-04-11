@@ -55,34 +55,51 @@
 				wp_nonce_field('db_tagcloud_form');
 		?>
 
-		<table class="form-table">
-			<tr valign="top" class="db-tgcl-admin-cols-default">
-				<th scope="row" rowspan="3" width="20%">
+		<table class="form-table" width="100%">
+			<tr valign="top">
+				<th scope="row" colspan="2" width="20%">
 					<?php _e('Default number of columns' , 'dbTagCloud') ?>
-					<div class="td-tgcl-field-description">The default number of columns will appear in the shortcode</div>
+					<div class="db-tgcl-field-description">The default number of columns will appear in the shortcode</div>
 				</th>
-				<td rowspan="3" width="20%">
-					<input type="text" name="cols"
+				<td width="10%">
+					<input type="text" name="cols" id="db_tgcl_cols"
 							size="5" value="<?php echo $cols; ?>" />
 				</td>
-				<th scope="rowgroup" rowspan="3" width="20%">
-					<?php _e('Styling' , 'dbTagCloud') ?>
-					<div class="td-tgcl-field-description">Customization of the appearance of the DB Tagcloud</div>
+				<th scope="col" width="70%">
+					<?php _e('Preview' , 'dbTagCloud') ?>
 				</th>
-				<th scope="row" width="20%">
+			</tr>
+			<tr valign="top">
+				<th scope="rowgroup" rowspan="3" width="10%">
+					<?php _e('Styling' , 'dbTagCloud') ?>
+					<div class="db-tgcl-field-description">Customization of the appearance of the DB Tagcloud</div>
+				</th>
+				<th scope="row" width="10%">
 					<?php _e('Font Size' , 'dbTagCloud') ?>
 				</th>
 				<td>
-					<input type="text" name="fontsize"
-							size="5" value="<?php echo $fontsize; ?>" /> px
+					<input type="text" name="fontsize" id="db_tgcl_fontsize"
+							size="3" value="<?php echo $fontsize; ?>" /> px
+				</td>
+				<td rowspan="3" id="db_tgcl_preview">
+					<ul class="db-tagcloud db-cols-<?php echo $cols; ?>">
+						<li><a href="#">Black</a></li>
+						<li><a href="#">White</a></li>
+						<li><a href="#">Red</a></li>
+						<li><a href="#">Orange</a></li>
+						<li><a href="#">Yellow</a></li>
+						<li><a href="#">Green</a></li>
+						<li><a href="#">Blue</a></li>
+						<li><a href="#">Purple</a></li>
+					</ul>
 				</td>
 			</tr>
-			<tr valign="top" class="db-tgcl-admin-cols-default">
-				<th scope="row" width="20%">
+			<tr valign="top">
+				<th scope="row" class="db-tgcl-after-rowspan">
 					<?php _e('Font Weight' , 'dbTagCloud') ?>
 				</th>
 				<td>
-					<select type="text" name="fontweight">
+					<select type="text" name="fontweight" id="db_tgcl_fontweight">
 						<option value="0" <?php selected( $fontweight, '0' ); ?>><?php _e('normal' , 'dbTagCloud') ?></option>
 						<option value="1" <?php selected( $fontweight, '1' ); ?>><?php _e('bold' , 'dbTagCloud') ?></option>
 						<option value="2" <?php selected( $fontweight, '2' ); ?>><?php _e('italic' , 'dbTagCloud') ?></option>
@@ -90,13 +107,13 @@
 					</select>
 				</td>
 			</tr>
-			<tr valign="top" class="db-tgcl-admin-cols-default">
-				<th scope="row" width="20%">
+			<tr valign="top">
+				<th scope="row" class="db-tgcl-after-rowspan">
 					<?php _e('Border Width' , 'dbTagCloud') ?>
 				</th>
 				<td>
-					<input type="text" name="borderwidth"
-							size="5" value="<?php echo $borderwidth; ?>" /> px
+					<input type="text" name="borderwidth" id="db_tgcl_borderwidth"
+							size="3" value="<?php echo $borderwidth; ?>" /> px
 				</td>
 			</tr>
 		</table>
