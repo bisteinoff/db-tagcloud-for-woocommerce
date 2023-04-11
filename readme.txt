@@ -1,6 +1,6 @@
 === DB Tagcloud for Woocommerce ===
 Contributors: Denis Bisteinov
-Donate link: http://seogio.ru
+Donate link: https://bisteinoff.com
 Tags: woocommerce, tagcloud, seo
 Requires at least: 4.0
 Tested up to: 6.2
@@ -32,6 +32,9 @@ If you use TinyMCE editor, there is a button "Tag Cloud" at the end of the 2nd b
 A tagcloud helps to improve the linking between attribute categories pages of your e-commerce website.
 
 == Changelog ==
+
+= 1.3.3 =
+* New option choose color via wp color picker
 
 = 1.3.2 =
 * Preview of new styling settings in admin panel

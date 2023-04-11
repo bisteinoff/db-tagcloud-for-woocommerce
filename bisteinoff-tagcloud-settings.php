@@ -4,6 +4,7 @@
 	$fontsize = esc_html ( get_option('db_tagcloud_fontsize') );
 	$fontweight = (int) get_option('db_tagcloud_fontweight');
 	$borderwidth = esc_html ( get_option('db_tagcloud_borderwidth') );
+	$color = sanitize_hex_color ( get_option('db_tagcloud_color') );
 
 	if ( isset ( $_POST['submit'] ) )
 	{
@@ -36,6 +37,10 @@
 		else
 			$borderwidth = '';
 		update_option ( 'db_tagcloud_borderwidth', $borderwidth );
+
+		// Color
+		$color = sanitize_hex_color ( $_POST['color'] );
+		update_option( 'db_tagcloud_color', $color );
 
 		require_once('css/custom.php');
 
@@ -70,7 +75,7 @@
 				</th>
 			</tr>
 			<tr valign="top">
-				<th scope="rowgroup" rowspan="3" width="10%">
+				<th scope="rowgroup" rowspan="4" width="10%">
 					<?php _e('Styling' , 'dbTagCloud') ?>
 					<div class="db-tgcl-field-description">Customization of the appearance of the DB Tagcloud</div>
 				</th>
@@ -81,7 +86,7 @@
 					<input type="text" name="fontsize" id="db_tgcl_fontsize"
 							size="3" value="<?php echo $fontsize; ?>" /> px
 				</td>
-				<td rowspan="3" id="db_tgcl_preview">
+				<td rowspan="4" id="db_tgcl_preview">
 					<ul class="db-tagcloud db-cols-<?php echo $cols; ?>">
 						<li><a href="#">Black</a></li>
 						<li><a href="#">White</a></li>
@@ -114,6 +119,15 @@
 				<td>
 					<input type="text" name="borderwidth" id="db_tgcl_borderwidth"
 							size="3" value="<?php echo $borderwidth; ?>" /> px
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" class="db-tgcl-after-rowspan">
+					<?php _e('Color' , 'dbTagCloud') ?>
+				</th>
+				<td id="db_tgcl_color_inner">
+					<input type="text" name="color" id="db_tgcl_color" class="db-tgcl-color"
+							size="7" value="<?php echo $color; ?>" data-default-color="#333333" />
 				</td>
 			</tr>
 		</table>

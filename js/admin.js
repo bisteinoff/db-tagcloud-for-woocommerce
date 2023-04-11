@@ -6,12 +6,13 @@ const dbTagcloudCols = document.getElementById("db_tgcl_cols");
 const dbTagcloudFontsize = document.getElementById("db_tgcl_fontsize");
 const dbTagcloudFontweight = document.getElementById("db_tgcl_fontweight");
 const dbTagcloudBorderwidth = document.getElementById("db_tgcl_borderwidth");
+const dbTagcloudColor = document.getElementById("db_tgcl_color");
 
-let dbTagcloudColsOldnumber = dbTagcloudCols.value;
+let dbTagcloudColsOldNumber = dbTagcloudCols.value;
 
 dbTagcloudCols.addEventListener('focus', function(){
 
-    dbTagcloudColsOldnumber = dbTagcloudCols.value;
+    dbTagcloudColsOldNumber = dbTagcloudCols.value;
 
 });
 
@@ -20,7 +21,7 @@ dbTagcloudCols.addEventListener('change', function(){
 
     let cols = dbTagcloudCols.value;
 
-    dbTagcloudPreview.classList.remove("db-cols-" + dbTagcloudColsOldnumber);
+    dbTagcloudPreview.classList.remove("db-cols-" + dbTagcloudColsOldNumber);
     dbTagcloudPreview.classList.add("db-cols-" + cols);
 
 });
@@ -69,4 +70,43 @@ dbTagcloudBorderwidth.addEventListener('change', function(){
 
        dbTagcloudPreviewAnchor.style.borderWidth = borderwidth + "px";        
 
+});
+
+
+jQuery(document).ready(function($){
+    $('.db-tgcl-color').wpColorPicker();
+});
+
+
+jQuery('.wp-color-picker').wpColorPicker({
+    /**
+     * @param {Event} event - standard jQuery event, produced by whichever
+     * control was changed.
+     * @param {Object} ui - standard jQuery UI object, with a color member
+     * containing a Color.js object.
+     */
+    change: function (event, ui) {
+        var element = event.target;
+        var color = ui.color.toString();
+    
+        for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+    
+           dbTagcloudPreviewAnchor.style.borderColor = color;
+    },
+
+    /**
+     * @param {Event} event - standard jQuery event, produced by "Clear"
+     * button.
+     */
+    clear: function (event) {
+        var element = jQuery(event.target).siblings('.wp-color-picker')[0];
+        var color = '';
+
+        if (element) {
+    
+            for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+        
+               dbTagcloudPreviewAnchor.style.borderColor = color;
+        }
+    }
 });

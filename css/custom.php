@@ -5,6 +5,7 @@
 	$fontsize = esc_html ( get_option('db_tagcloud_fontsize') );
 	$fontweight = esc_html ( get_option('db_tagcloud_fontweight') );
 	$borderwidth = esc_html ( get_option('db_tagcloud_borderwidth') );
+	$color = sanitize_hex_color ( get_option('db_tagcloud_color') );
 
 	$db_css .= ".db-tagcloud li a {";
 
@@ -30,6 +31,9 @@
 
 	if ( $borderwidth !== '' && $borderwidth >= 0 )
 		$db_css .= "border-width:" . $borderwidth . "px;";
+
+	if ( $color !== '' )
+		$db_css .= "border-color:{$color};color:{$color}";
 
 	$db_css .= "}";
 
