@@ -33,6 +33,10 @@ A tagcloud helps to improve the linking between attribute categories pages of yo
 
 == Changelog ==
 
+= 1.3.4 =
+* WP color picker preview in admin panel
+* Resolved the problem with cached css styles for preview
+
 = 1.3.3 =
 * New option choose color via wp color picker
 

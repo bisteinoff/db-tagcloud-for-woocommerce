@@ -8,6 +8,9 @@ const dbTagcloudFontweight = document.getElementById("db_tgcl_fontweight");
 const dbTagcloudBorderwidth = document.getElementById("db_tgcl_borderwidth");
 const dbTagcloudColor = document.getElementById("db_tgcl_color");
 
+
+/* Number of columns */
+
 let dbTagcloudColsOldNumber = dbTagcloudCols.value;
 
 dbTagcloudCols.addEventListener('focus', function(){
@@ -15,7 +18,6 @@ dbTagcloudCols.addEventListener('focus', function(){
     dbTagcloudColsOldNumber = dbTagcloudCols.value;
 
 });
-
 
 dbTagcloudCols.addEventListener('change', function(){
 
@@ -27,86 +29,114 @@ dbTagcloudCols.addEventListener('change', function(){
 });
 
 
-dbTagcloudFontsize.addEventListener('change', function(){
+
+/* Functions for style options */
+
+function dbNewFontsize() {
 
     let fontsize = dbTagcloudFontsize.value;
 
-    dbTagcloudPreview.style.fontSize = fontsize + "px";
+    for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+        dbTagcloudPreviewAnchor.style.fontSize = fontsize + "px";
 
-});
+}
 
 
-dbTagcloudFontweight.addEventListener('change', function(){
+function dbNewFontweight() {
 
-    let fontweight = dbTagcloudFontweight.value;
+    let option = dbTagcloudFontweight.value;
+    let fontweight;
+    let fontstyle;
 
-    switch (fontweight) {
+    switch (option) {
         case '0':
-            dbTagcloudPreview.style.fontWeight = "400";
-            dbTagcloudPreview.style.fontStyle = "normal";
+            fontweight = "400";
+            fontstyle = "normal";
             break;
         case '1':
-            dbTagcloudPreview.style.fontWeight = "700";
-            dbTagcloudPreview.style.fontStyle = "normal";
+            fontweight = "700";
+            fontstyle = "normal";
             break;
         case '2':
-            dbTagcloudPreview.style.fontWeight = "400";
-            dbTagcloudPreview.style.fontStyle = "italic";
+            fontweight = "400";
+            fontstyle = "italic";
             break;
         case '3':
-            dbTagcloudPreview.style.fontWeight = "700";
-            dbTagcloudPreview.style.fontStyle = "italic";
+            fontweight = "700";
+            fontstyle = "italic";
             break;
     }
 
-});
+    for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+
+        {
+            dbTagcloudPreviewAnchor.style.fontWeight = fontweight;
+            dbTagcloudPreviewAnchor.style.fontStyle = fontstyle;
+        }
+
+}
 
 
-dbTagcloudBorderwidth.addEventListener('change', function(){
+function dbNewBorderwidth() {
 
-    let borderwidth = dbTagcloudBorderwidth.value;
+let borderwidth = dbTagcloudBorderwidth.value;
 
     for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
 
        dbTagcloudPreviewAnchor.style.borderWidth = borderwidth + "px";        
 
-});
+}
 
+
+
+/* Run all functions for style options on load as old css might be cached */
+
+window.onload = function () {
+
+    dbNewFontsize();
+    dbNewFontweight();
+    dbNewBorderwidth();
+
+};
+
+
+
+/* Event Listeners for changing of style options */
+
+dbTagcloudFontsize.addEventListener('change', dbNewFontsize);
+dbTagcloudFontweight.addEventListener('change', dbNewFontweight);
+dbTagcloudBorderwidth.addEventListener('change', dbNewBorderwidth);
+
+
+
+/* WP Color Picker */
 
 jQuery(document).ready(function($){
     $('.db-tgcl-color').wpColorPicker();
 });
 
+/* Changing color */
 
-jQuery('.wp-color-picker').wpColorPicker({
-    /**
-     * @param {Event} event - standard jQuery event, produced by whichever
-     * control was changed.
-     * @param {Object} ui - standard jQuery UI object, with a color member
-     * containing a Color.js object.
-     */
-    change: function (event, ui) {
-        var element = event.target;
-        var color = ui.color.toString();
-    
-        for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
-    
-           dbTagcloudPreviewAnchor.style.borderColor = color;
-    },
+Object.defineProperty(dbTagcloudColor, "value", {
+    set: function (t) {
+       
+    dbTagcloudColor.setAttribute('value',t);
 
-    /**
-     * @param {Event} event - standard jQuery event, produced by "Clear"
-     * button.
-     */
-    clear: function (event) {
-        var element = jQuery(event.target).siblings('.wp-color-picker')[0];
-        var color = '';
+    let color = dbTagcloudColor.value;
 
-        if (element) {
-    
-            for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
-        
-               dbTagcloudPreviewAnchor.style.borderColor = color;
+    for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+
+        {
+            dbTagcloudPreviewAnchor.style.color = color;
+            dbTagcloudPreviewAnchor.style.borderColor = color;
         }
+       
+    },
+    
+    get: function(){
+
+        return dbTagcloudColor.getAttribute('value');
+
     }
+
 });
