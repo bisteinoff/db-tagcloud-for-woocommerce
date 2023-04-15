@@ -2,6 +2,7 @@
 
 const dbTagcloudPreview = document.getElementById("db_tgcl_preview").getElementsByClassName("db-tagcloud")[0];
 const dbTagcloudPreviewAnchors = dbTagcloudPreview.getElementsByTagName("a");
+const dbTagcloudPreloader = document.getElementById("db_tgcl_preloader");
 const dbTagcloudCols = document.getElementById("db_tgcl_cols");
 const dbTagcloudFontsize = document.getElementById("db_tgcl_fontsize");
 const dbTagcloudFontweight = document.getElementById("db_tgcl_fontweight");
@@ -96,6 +97,10 @@ window.onload = function () {
     dbNewFontsize();
     dbNewFontweight();
     dbNewBorderwidth();
+    setTimeout( () => {
+        dbTagcloudPreview.classList.remove("db-hidden");
+        dbTagcloudPreloader.classList.add("db-hidden");
+    }, 1500 );
 
 };
 

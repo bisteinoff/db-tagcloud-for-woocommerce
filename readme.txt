@@ -7,11 +7,11 @@ Tested up to: 6.2
 Stable tag: trunk
 License: GPL2
 
-The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
+The plugin helps to easily make a tag cloud of pages for any Woocommerce attribute using a shortcode. This is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO).
 
 == Description ==
 
-DB Tagcloud for Woocommerce is an easy (i.e. automated) solution for creating and styling a tagcloud on a category product page on your site.
+DB Tagcloud for Woocommerce is an easy (i.e. automated) solution for creating and styling a tagcloud for any Woocommerce attribute. You can use the generated shortcode on any page of your website.
 
 == Installation ==
 
@@ -32,6 +32,11 @@ If you use TinyMCE editor, there is a button "Tag Cloud" at the end of the 2nd b
 A tagcloud helps to improve the linking between attribute categories pages of your e-commerce website.
 
 == Changelog ==
+
+= 1.3.5 =
+* Preloader for preview in admin panel
+* List of Woocommerce Attributes
+* Customization of the settings page in admin panel
 
 = 1.3.4 =
 * WP color picker preview in admin panel
