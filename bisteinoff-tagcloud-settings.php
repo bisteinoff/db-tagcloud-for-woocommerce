@@ -93,7 +93,7 @@
 				</td>
 				<td rowspan="4" id="db_tgcl_preview">
 					<div id="db_tgcl_preloader">
-						<img src="/wp-content/plugins/db-tagcloud/img/spinner.gif" width="42" height="42" alt="<?php _e('Wait a second...' , 'dbTagCloud') ?>" title="<?php _e('Wait a second...' , 'dbTagCloud') ?>" />
+						<img src="/wp-content/plugins/db-tagcloud-for-woocommerce/img/spinner.gif" width="42" height="42" alt="<?php _e('Wait a second...' , 'dbTagCloud') ?>" title="<?php _e('Wait a second...' , 'dbTagCloud') ?>" />
 					</div>
 					<ul class="db-tagcloud db-cols-<?php echo $cols; ?> db-hidden">
 						<li><a href="#"><?php _e('Square' , 'dbTagCloud') ?></a></li>
@@ -196,7 +196,7 @@
 
 		<p><?php _e('There are two DB taglouds in this picture. The first one is an 8-columns tagclound. The second one has 4 columns.', 'dbTagCloud'); ?></p>
 
-		<p class="db-center"><img class="db-roundborder" src="/wp-content/plugins/db-tagcloud/img/example.png" width="700" height="475" alt="<?php _e('2 examples of tag clouds', 'dbTagCloud'); ?>" /></p>
+		<p class="db-center"><img class="db-roundborder" src="/wp-content/plugins/db-tagcloud-for-woocommerce/img/example.png" width="700" height="475" alt="<?php _e('2 examples of tag clouds', 'dbTagCloud'); ?>" /></p>
 
 	</div>
 
