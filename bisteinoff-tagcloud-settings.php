@@ -53,7 +53,6 @@
 
 	<div class="db-tgcl-description">
 		<p><?php _e("The plugin helps to easily make a tag cloud of pages for any Woocommerce attribute using a shortcode. This is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO).", 'dbTagCloud') ?></p>
-		<p><?php _e("", 'dbTagCloud') ?></p>
 	</div>
 
 	<h2><?php _e('Settings', 'dbTagCloud'); ?></h2>
@@ -69,7 +68,7 @@
 			<tr valign="top">
 				<th scope="row" colspan="2" width="20%">
 					<?php _e('Default number of columns' , 'dbTagCloud') ?>
-					<div class="db-tgcl-field-description">The default number of columns will appear in the shortcode</div>
+					<div class="db-tgcl-field-description"><?php _e("The default number of columns will appear in the shortcode", 'dbTagCloud') ?></div>
 				</th>
 				<td width="10%">
 					<input type="text" name="cols" id="db_tgcl_cols"
@@ -82,7 +81,7 @@
 			<tr valign="top">
 				<th scope="rowgroup" rowspan="4" width="10%">
 					<?php _e('Styling' , 'dbTagCloud') ?>
-					<div class="db-tgcl-field-description">Customization of the appearance of the DB Tagcloud</div>
+					<div class="db-tgcl-field-description"><?php _e("Customization of the appearance of the DB Tagcloud", 'dbTagCloud') ?></div>
 				</th>
 				<th scope="row" width="10%">
 					<?php _e('Font Size' , 'dbTagCloud') ?>
