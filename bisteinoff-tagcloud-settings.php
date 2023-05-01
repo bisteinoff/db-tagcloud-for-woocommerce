@@ -1,5 +1,7 @@
 <?php // THE SETTINGS PAGE
 
+	$d = 'db-tagcloud-for-woocommerce'; // domain for translate.wordpress.org
+
 	$cols = (int) get_option('db_tagcloud_cols');
 	$fontsize = esc_html ( get_option('db_tagcloud_fontsize') );
 	$fontweight = (int) get_option('db_tagcloud_fontweight');
@@ -11,7 +13,7 @@
 
 		if ( function_exists('current_user_can') &&
 			 !current_user_can('manage_options') )
-				die( _e('Error: You do not have the permission to update the value' , 'dbTagCloud') );
+				die( _e( 'Error: You do not have the permission to update the value' , $d ) );
 
 		if ( function_exists('check_admin_referrer') )
 			check_admin_referrer('db_tagcloud_form');
@@ -49,13 +51,13 @@
 ?>
 <div class='wrap db-tgcl-admin'>
 
-	<h1><?php _e('DB Tag Cloud', 'dbTagCloud'); ?></h1>
+	<h1><?php _e( 'DB Tag Cloud', $d ); ?></h1>
 
 	<div class="db-tgcl-description">
-		<p><?php _e("The plugin helps to easily make a tag cloud of pages for any Woocommerce attribute using a shortcode. This is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO).", 'dbTagCloud') ?></p>
+		<p><?php _e( 'The plugin helps to easily make a tag cloud of pages for any Woocommerce attribute using a shortcode. This is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO).', $d ) ?></p>
 	</div>
 
-	<h2><?php _e('Settings', 'dbTagCloud'); ?></h2>
+	<h2><?php _e( 'Settings', $d ); ?></h2>
 
 	<form name="db-tagcloud" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=db-tagcloud&amp;updated=true">
 
@@ -67,24 +69,24 @@
 		<table class="form-table db-tgcl-table" width="100%">
 			<tr valign="top">
 				<th scope="row" colspan="2" width="20%">
-					<?php _e('Default number of columns' , 'dbTagCloud') ?>
-					<div class="db-tgcl-field-description"><?php _e("The default number of columns will appear in the shortcode", 'dbTagCloud') ?></div>
+					<?php _e( 'Default number of columns' , $d ) ?>
+					<div class="db-tgcl-field-description"><?php _e( 'The default number of columns will appear in the shortcode', $d ) ?></div>
 				</th>
 				<td width="10%">
 					<input type="text" name="cols" id="db_tgcl_cols"
 							size="5" value="<?php echo $cols; ?>" />
 				</td>
 				<th scope="col" width="70%">
-					<?php _e('Preview' , 'dbTagCloud') ?>
+					<?php _e( 'Preview' , $d ) ?>
 				</th>
-			</tr>
+
 			<tr valign="top">
 				<th scope="rowgroup" rowspan="4" width="10%">
-					<?php _e('Styling' , 'dbTagCloud') ?>
-					<div class="db-tgcl-field-description"><?php _e("Customization of the appearance of the DB Tagcloud", 'dbTagCloud') ?></div>
+					<?php _e( 'Styling' , $d ) ?>
+					<div class="db-tgcl-field-description"><?php _e( 'Customization of the appearance of the DB Tagcloud', $d ) ?></div>
 				</th>
 				<th scope="row" width="10%">
-					<?php _e('Font Size' , 'dbTagCloud') ?>
+					<?php _e( 'Font Size' , $d ) ?>
 				</th>
 				<td>
 					<input type="text" name="fontsize" id="db_tgcl_fontsize"
@@ -92,40 +94,40 @@
 				</td>
 				<td rowspan="4" id="db_tgcl_preview">
 					<div id="db_tgcl_preloader">
-						<img src="/wp-content/plugins/db-tagcloud-for-woocommerce/img/spinner.gif" width="42" height="42" alt="<?php _e('Wait a second...' , 'dbTagCloud') ?>" title="<?php _e('Wait a second...' , 'dbTagCloud') ?>" />
+						<img src="/wp-content/plugins/db-tagcloud-for-woocommerce/img/spinner.gif" width="42" height="42" alt="<?php _e( 'Wait a second...' , $d ) ?>" title="<?php _e( 'Wait a second...' , $d ) ?>" />
 					</div>
 					<ul class="db-tagcloud db-cols-<?php echo $cols; ?> db-hidden">
-						<li><a href="#"><?php _e('Square' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Rectangular' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Round' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Oval' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Semicircular' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('L-Shape' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Cushion Back' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Pillow Back' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Tufted Back' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Split Back' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Loose Back' , 'dbTagCloud') ?></a></li>
-						<li><a href="#"><?php _e('Tight Back' , 'dbTagCloud') ?></a></li>
+						<li><a href="#"><?php _e( 'Square' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Rectangular' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Round' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Oval' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Semicircular' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'L-Shape' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Cushion Back' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Pillow Back' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Tufted Back' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Split Back' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Loose Back' , $d ) ?></a></li>
+						<li><a href="#"><?php _e( 'Tight Back' , $d ) ?></a></li>
 					</ul>
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row" class="db-tgcl-after-rowspan">
-					<?php _e('Font Weight' , 'dbTagCloud') ?>
+					<?php _e( 'Font Weight' , $d ) ?>
 				</th>
 				<td>
 					<select type="text" name="fontweight" id="db_tgcl_fontweight">
-						<option value="0" <?php selected( $fontweight, '0' ); ?>><?php _e('normal' , 'dbTagCloud') ?></option>
-						<option value="1" <?php selected( $fontweight, '1' ); ?>><?php _e('bold' , 'dbTagCloud') ?></option>
-						<option value="2" <?php selected( $fontweight, '2' ); ?>><?php _e('italic' , 'dbTagCloud') ?></option>
-						<option value="3" <?php selected( $fontweight, '3' ); ?>><?php _e('bold italic' , 'dbTagCloud') ?></option>
+						<option value="0" <?php selected( $fontweight, '0' ); ?>><?php _e( 'normal' , $d ) ?></option>
+						<option value="1" <?php selected( $fontweight, '1' ); ?>><?php _e( 'bold' , $d ) ?></option>
+						<option value="2" <?php selected( $fontweight, '2' ); ?>><?php _e( 'italic' , $d ) ?></option>
+						<option value="3" <?php selected( $fontweight, '3' ); ?>><?php _e( 'bold italic' , $d ) ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row" class="db-tgcl-after-rowspan">
-					<?php _e('Border Width' , 'dbTagCloud') ?>
+					<?php _e( 'Border Width' , $d ) ?>
 				</th>
 				<td>
 					<input type="text" name="borderwidth" id="db_tgcl_borderwidth"
@@ -134,7 +136,7 @@
 			</tr>
 			<tr valign="top">
 				<th scope="row" class="db-tgcl-after-rowspan">
-					<?php _e('Color' , 'dbTagCloud') ?>
+					<?php _e( 'Color' , $d ) ?>
 				</th>
 				<td id="db_tgcl_color_inner">
 					<input type="text" name="color" id="db_tgcl_color" class="db-tgcl-color"
@@ -151,32 +153,32 @@
 
 	</form>
 
-	<h2><?php _e('Shortcode', 'dbTagCloud'); ?></h2>
+	<h2><?php _e( 'Shortcode', $d ); ?></h2>
 
 
 	<div class="db-tgcl-description">
 
-		<p class="db-center"><?php _e('Example:', 'dbTagCloud'); ?></p>
+		<p class="db-center"><?php _e( 'Example:', $d ); ?></p>
 
-		<div id="db_tgcl_shortcode">[tagcloud attr="<span class="db-highlighted">color</span>" cols="<span class="db-highlighted"><?php echo ( $cols > 0 ? $cols : '8' ); ?></span>"]</div>
+		<div id="db_tgcl_shortcode">[tagcloud attr="<span class="db-highlighted">color</span>" cols="<span class="db-highlighted"><?php echo ( $cols > 0 ? $cols : '5' ); ?></span>"]</div>
 
-	<p><?php _e('In this example you will want to change the name of a woocommerce attribute and the number of columns.', 'dbTagCloud'); ?></p>
+	<p><?php _e( 'In this example you will want to change the name of a woocommerce attribute and the number of columns.', $d ); ?></p>
 
 	</div>
 
-	<h2><?php _e('Woocommerce Attributes', 'dbTagCloud'); ?></h2>
+	<h2><?php _e( 'Woocommerce Attributes', $d ); ?></h2>
 
 	<div class="db-tgcl-description">
 
-		<p><?php _e('The list of Woocommerce Attributes on your website.', 'dbTagCloud'); ?></p>
+		<p><?php _e( 'The list of Woocommerce Attributes on your website.', $d ); ?></p>
 
 		<table id="db_tgcl_woo_attr_table" class="db-tgcl-table" width="100%">
 			<tr>
 				<th scope="col" width="50%">
-					<?php _e('Name of Attribute' , 'dbTagCloud') ?>
+					<?php _e( 'Name of Attribute' , $d ) ?>
 				</th>
 				<th scope="col" width="50%">
-					<?php _e('Parameter for Shortcode' , 'dbTagCloud') ?>
+					<?php _e( 'Parameter for Shortcode' , $d ) ?>
 				</th>
 			</tr>
 			<?php
@@ -189,13 +191,13 @@
 
 	</div>
 
-	<h2><?php _e('Examples', 'dbTagCloud'); ?></h2>
+	<h2><?php _e( 'Examples', $d ); ?></h2>
 
 	<div class="db-tgcl-description">
 
-		<p><?php _e('There are two DB taglouds in this picture. The first one is an 8-columns tagclound. The second one has 4 columns.', 'dbTagCloud'); ?></p>
+		<p><?php _e( 'There are two DB taglouds in this picture. The first one is an 8-columns tagclound. The second one has 4 columns.', $d ); ?></p>
 
-		<p class="db-center"><img class="db-roundborder" src="/wp-content/plugins/db-tagcloud-for-woocommerce/img/example.png" width="700" height="475" alt="<?php _e('2 examples of tag clouds', 'dbTagCloud'); ?>" /></p>
+		<p class="db-center"><img class="db-roundborder" src="/wp-content/plugins/db-tagcloud-for-woocommerce/img/example.png" width="700" height="475" alt="<?php _e( '2 examples of tag clouds', $d ); ?>" /></p>
 
 	</div>
 

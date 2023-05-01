@@ -3,7 +3,7 @@
 Plugin Name: DB Tagcloud for Woocommerce
 Plugin URI: https://github.com/bisteinoff/db-tagcloud-for-woocommerce
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.4
+Version: 1.4.1
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 License: GPL2
@@ -25,7 +25,7 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	// Example: [tagcloud attr="color" cols="8"]
+	// Example: [tagcloud attr="color" cols="5"]
 
 	class dbTagCloud
 
@@ -36,7 +36,7 @@ License: GPL2
 		function dbTagCloud()
 		{
 
-			add_option('db_tagcloud_cols', '8');
+			add_option('db_tagcloud_cols', '5');
 			add_option('db_tagcloud_fontsize');
 			add_option('db_tagcloud_fontweight');
 			add_option('db_tagcloud_borderwidth');
@@ -133,8 +133,8 @@ License: GPL2
 				$icon = '<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path style="fill:white;" d="M16,7h0a8.0233,8.0233,0,0,1,7.8649,6.4935l.2591,1.346,1.3488.244A5.5019,5.5019,0,0,1,24.5076,26H7.4954a5.5019,5.5019,0,0,1-.9695-10.9165l1.3488-.244.2591-1.346A8.0256,8.0256,0,0,1,16,7m0-2a10.0244,10.0244,0,0,0-9.83,8.1155A7.5019,7.5019,0,0,0,7.4911,28H24.5076a7.5019,7.5019,0,0,0,1.3213-14.8845A10.0229,10.0229,0,0,0,15.9883,5Z" transform="translate(0)"/></svg>';
 
 				add_menu_page(
-					'DB Tag Cloud Settings',
-					'DB Tag Cloud',
+					__( 'DB Tag Cloud Settings' , 'db-tagcloud-for-woocommerce' ),
+					__( 'DB Tag Cloud' , 'db-tagcloud-for-woocommerce' ),
 					'manage_options',
 					'db-tagcloud',
 					array (&$this, 'admin_page_callback'),
@@ -175,9 +175,9 @@ License: GPL2
 
 		function admin_footer_js()
 		{
-			$cols = get_option('db_tagcloud_cols'); ?>
-			
-<script type="text/javascript">var dbTagCloudCols = <?php echo $cols; ?></script><?php
+			$cols = get_option('db_tagcloud_cols');
+
+			?><script type="text/javascript">let dbTagCloudCols = <?php echo $cols; ?></script><?php
 			
 		}
 
