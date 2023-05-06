@@ -7,7 +7,11 @@ const dbTagcloudCols = document.getElementById("db_tgcl_cols");
 const dbTagcloudFontsize = document.getElementById("db_tgcl_fontsize");
 const dbTagcloudFontweight = document.getElementById("db_tgcl_fontweight");
 const dbTagcloudBorderwidth = document.getElementById("db_tgcl_borderwidth");
+const dbTagcloudUnderlined = document.getElementById("db_tgcl_underlined");
 const dbTagcloudColor = document.getElementById("db_tgcl_color");
+const dbTagcloudHover = document.getElementById("db_tgcl_color_hover");
+const dbTagcloudBackground = document.getElementById("db_tgcl_background");
+const dbTagcloudBackgroundHover = document.getElementById("db_tgcl_background_hover");
 
 
 /* Number of columns */
@@ -80,11 +84,23 @@ function dbNewFontweight() {
 
 function dbNewBorderwidth() {
 
-let borderwidth = dbTagcloudBorderwidth.value;
+    let borderwidth = dbTagcloudBorderwidth.value;
 
     for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
 
        dbTagcloudPreviewAnchor.style.borderWidth = borderwidth + "px";        
+
+}
+
+
+function dbNewUnderlined() {
+
+    let underlined = dbTagcloudUnderlined.value;
+
+    for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+
+       if ( underlined === 1 ) dbTagcloudPreviewAnchor.style.textDecoration = "underline";
+       else dbTagcloudPreviewAnchor.style.textDecoration = "none";
 
 }
 
@@ -97,6 +113,7 @@ window.onload = function () {
     dbNewFontsize();
     dbNewFontweight();
     dbNewBorderwidth();
+    dbNewUnderlined();
     setTimeout( () => {
         dbTagcloudPreview.classList.remove("db-hidden");
         dbTagcloudPreloader.classList.add("db-hidden");
@@ -111,6 +128,7 @@ window.onload = function () {
 dbTagcloudFontsize.addEventListener('change', dbNewFontsize);
 dbTagcloudFontweight.addEventListener('change', dbNewFontweight);
 dbTagcloudBorderwidth.addEventListener('change', dbNewBorderwidth);
+dbTagcloudUnderlined.addEventListener('change', dbNewUnderlined);
 
 
 
@@ -118,6 +136,9 @@ dbTagcloudBorderwidth.addEventListener('change', dbNewBorderwidth);
 
 jQuery(document).ready(function($){
     $('.db-tgcl-color').wpColorPicker();
+    $('.db-tgcl-color-hover').wpColorPicker();
+    $('.db-tgcl-background').wpColorPicker();
+    $('.db-tgcl-background-hover').wpColorPicker();
 });
 
 /* Changing color */
@@ -141,6 +162,84 @@ Object.defineProperty(dbTagcloudColor, "value", {
     get: function(){
 
         return dbTagcloudColor.getAttribute('value');
+
+    }
+
+});
+
+
+
+Object.defineProperty(dbTagcloudHover, "value", {
+    set: function (t) {
+       
+    dbTagcloudHover.setAttribute('value',t);
+
+    let color = dbTagcloudHover.value;
+
+    for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+
+        {
+            dbTagcloudPreviewAnchor.style.color = color;
+            dbTagcloudPreviewAnchor.style.borderColor = color;
+        }
+       
+    },
+    
+    get: function(){
+
+        return dbTagcloudHover.getAttribute('value');
+
+    }
+
+});
+
+
+
+Object.defineProperty(dbTagcloudBackground, "value", {
+    set: function (t) {
+       
+    dbTagcloudBackground.setAttribute('value',t);
+
+    let color = dbTagcloudBackground.value;
+
+    for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+
+        {
+            dbTagcloudPreviewAnchor.style.color = color;
+            dbTagcloudPreviewAnchor.style.borderColor = color;
+        }
+       
+    },
+    
+    get: function(){
+
+        return dbTagcloudBackground.getAttribute('value');
+
+    }
+
+});
+
+
+
+Object.defineProperty(dbTagcloudBackgroundHover, "value", {
+    set: function (t) {
+       
+    dbTagcloudBackgroundHover.setAttribute('value',t);
+
+    let color = dbTagcloudBackgroundHover.value;
+
+    for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+
+        {
+            dbTagcloudPreviewAnchor.style.color = color;
+            dbTagcloudPreviewAnchor.style.borderColor = color;
+        }
+       
+    },
+    
+    get: function(){
+
+        return dbTagcloudBackgroundHover.getAttribute('value');
 
     }
 

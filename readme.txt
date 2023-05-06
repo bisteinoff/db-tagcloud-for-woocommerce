@@ -4,7 +4,7 @@ Donate link: https://bisteinoff.com
 Tags: woocommerce, tagcloud, seo
 Requires at least: 4.6
 Tested up to: 6.2
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPL2
 
 The plugin helps to easily make a tag cloud of pages for any Woocommerce attribute using a shortcode. This is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO).

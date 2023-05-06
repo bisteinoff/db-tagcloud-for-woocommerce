@@ -6,7 +6,11 @@
 	$fontsize = esc_html ( get_option('db_tagcloud_fontsize') );
 	$fontweight = (int) get_option('db_tagcloud_fontweight');
 	$borderwidth = esc_html ( get_option('db_tagcloud_borderwidth') );
+	$underlined = (int) get_option('db_tagcloud_underlined');
 	$color = sanitize_hex_color ( get_option('db_tagcloud_color') );
+	$color_hover = sanitize_hex_color ( get_option('db_tagcloud_color_hover') );
+	$background = sanitize_hex_color ( get_option('db_tagcloud_background') );
+	$background_hover = sanitize_hex_color ( get_option('db_tagcloud_background_hover') );
 
 	if ( isset ( $_POST['submit'] ) )
 	{
@@ -40,9 +44,25 @@
 			$borderwidth = '';
 		update_option ( 'db_tagcloud_borderwidth', $borderwidth );
 
+		// Underlined
+		$underlined = (int) $_POST['underlined'];
+		update_option ( 'db_tagcloud_underlined', $underlined );
+
 		// Color
 		$color = sanitize_hex_color ( $_POST['color'] );
 		update_option( 'db_tagcloud_color', $color );
+
+		// Color on Hover
+		$color_hover = sanitize_hex_color ( $_POST['color_hover'] );
+		update_option( 'db_tagcloud_color_hover', $color_hover );
+
+		// Background Color
+		$background = sanitize_hex_color ( $_POST['background'] );
+		update_option( 'db_tagcloud_background', $background );
+
+		// Background Color on Hover
+		$background_hover = sanitize_hex_color ( $_POST['background_hover'] );
+		update_option( 'db_tagcloud_background_hover', $background_hover );
 
 		require_once('css/custom.php');
 
@@ -81,7 +101,7 @@
 				</th>
 
 			<tr valign="top">
-				<th scope="rowgroup" rowspan="4" width="10%">
+				<th scope="rowgroup" rowspan="8" width="10%">
 					<?php _e( 'Styling' , $d ) ?>
 					<div class="db-tgcl-field-description"><?php _e( 'Customization of the appearance of the DB Tagcloud', $d ) ?></div>
 				</th>
@@ -92,7 +112,7 @@
 					<input type="text" name="fontsize" id="db_tgcl_fontsize"
 							size="3" value="<?php echo $fontsize; ?>" /> px
 				</td>
-				<td rowspan="4" id="db_tgcl_preview">
+				<td rowspan="8" id="db_tgcl_preview">
 					<div id="db_tgcl_preloader">
 						<img src="/wp-content/plugins/db-tagcloud-for-woocommerce/img/spinner.gif" width="42" height="42" alt="<?php _e( 'Wait a second...' , $d ) ?>" title="<?php _e( 'Wait a second...' , $d ) ?>" />
 					</div>
@@ -136,11 +156,49 @@
 			</tr>
 			<tr valign="top">
 				<th scope="row" class="db-tgcl-after-rowspan">
+					<?php _e( 'Underlined' , $d ) ?>
+				</th>
+				<td>
+					<select type="text" name="underlined" id="db_tgcl_underlined">
+						<option value="1" <?php selected( $underlined, '1' ); ?>><?php _e( 'Yes' , $d ) ?></option>
+						<option value="0" <?php selected( $underlined, '0' ); ?>><?php _e( 'No' , $d ) ?></option>
+					</select>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" class="db-tgcl-after-rowspan">
 					<?php _e( 'Color' , $d ) ?>
 				</th>
 				<td id="db_tgcl_color_inner">
 					<input type="text" name="color" id="db_tgcl_color" class="db-tgcl-color"
 							size="7" value="<?php echo $color; ?>" data-default-color="#333333" />
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" class="db-tgcl-after-rowspan">
+					<?php _e( 'Color' , $d ) ?> <?php _e( 'on Hover' , $d ) ?>
+				</th>
+				<td id="db_tgcl_color_hover_inner">
+					<input type="text" name="color_hover" id="db_tgcl_color_hover" class="db-tgcl-color-hover"
+							size="7" value="<?php echo $color_hover; ?>" data-default-color="#666666" />
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" class="db-tgcl-after-rowspan">
+					<?php _e( 'Background Color' , $d ) ?>
+				</th>
+				<td id="db_tgcl_background_inner">
+					<input type="text" name="background" id="db_tgcl_background" class="db-tgcl-background"
+							size="7" value="<?php echo $background; ?>" data-default-color="#ffffff" />
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" class="db-tgcl-after-rowspan">
+					<?php _e( 'Background Color' , $d ) ?> <?php _e( 'on Hover' , $d ) ?>
+				</th>
+				<td id="db_tgcl_background_hover_inner">
+					<input type="text" name="background_hover" id="db_tgcl_background_hover" class="db-tgcl-background-hover"
+							size="7" value="<?php echo $background_hover; ?>" data-default-color="#ffffff" />
 				</td>
 			</tr>
 		</table>
