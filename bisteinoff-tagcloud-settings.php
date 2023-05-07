@@ -7,6 +7,7 @@
 	$fontweight = (int) get_option('db_tagcloud_fontweight');
 	$borderwidth = esc_html ( get_option('db_tagcloud_borderwidth') );
 	$underlined = (int) get_option('db_tagcloud_underlined');
+	$underlined_hover = (int) get_option('db_tagcloud_underlined_hover');
 	$color = sanitize_hex_color ( get_option('db_tagcloud_color') );
 	$color_hover = sanitize_hex_color ( get_option('db_tagcloud_color_hover') );
 	$background = sanitize_hex_color ( get_option('db_tagcloud_background') );
@@ -48,6 +49,10 @@
 		$underlined = (int) $_POST['underlined'];
 		update_option ( 'db_tagcloud_underlined', $underlined );
 
+		// Underlined on Hover
+		$underlined_hover = (int) $_POST['underlined_hover'];
+		update_option ( 'db_tagcloud_underlined_hover', $underlined_hover );
+
 		// Color
 		$color = sanitize_hex_color ( $_POST['color'] );
 		update_option( 'db_tagcloud_color', $color );
@@ -88,31 +93,24 @@
 
 		<table class="form-table db-tgcl-table" width="100%">
 			<tr valign="top">
-				<th scope="row" colspan="2" width="20%">
+				<th scope="row" width="15%">
 					<?php _e( 'Default number of columns' , $d ) ?>
 					<div class="db-tgcl-field-description"><?php _e( 'The default number of columns will appear in the shortcode', $d ) ?></div>
 				</th>
-				<td width="10%">
+				<td width="15%">
 					<input type="text" name="cols" id="db_tgcl_cols"
 							size="5" value="<?php echo $cols; ?>" />
 				</td>
 				<th scope="col" width="70%">
 					<?php _e( 'Preview' , $d ) ?>
 				</th>
-
+			</tr>
 			<tr valign="top">
-				<th scope="rowgroup" rowspan="8" width="10%">
+				<th scope="colgroup" colspan="2">
 					<?php _e( 'Styling' , $d ) ?>
 					<div class="db-tgcl-field-description"><?php _e( 'Customization of the appearance of the DB Tagcloud', $d ) ?></div>
 				</th>
-				<th scope="row" width="10%">
-					<?php _e( 'Font Size' , $d ) ?>
-				</th>
-				<td>
-					<input type="text" name="fontsize" id="db_tgcl_fontsize"
-							size="3" value="<?php echo $fontsize; ?>" /> px
-				</td>
-				<td rowspan="8" id="db_tgcl_preview">
+				<td rowspan="10" id="db_tgcl_preview">
 					<div id="db_tgcl_preloader">
 						<img src="/wp-content/plugins/db-tagcloud-for-woocommerce/img/spinner.gif" width="42" height="42" alt="<?php _e( 'Wait a second...' , $d ) ?>" title="<?php _e( 'Wait a second...' , $d ) ?>" />
 					</div>
@@ -133,7 +131,16 @@
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row" class="db-tgcl-after-rowspan">
+				<th scope="row">
+					<?php _e( 'Font Size' , $d ) ?>
+				</th>
+				<td>
+					<input type="text" name="fontsize" id="db_tgcl_fontsize"
+							size="3" value="<?php echo $fontsize; ?>" /> px
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">
 					<?php _e( 'Font Weight' , $d ) ?>
 				</th>
 				<td>
@@ -146,7 +153,7 @@
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row" class="db-tgcl-after-rowspan">
+				<th scope="row">
 					<?php _e( 'Border Width' , $d ) ?>
 				</th>
 				<td>
@@ -155,7 +162,7 @@
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row" class="db-tgcl-after-rowspan">
+				<th scope="row">
 					<?php _e( 'Underlined' , $d ) ?>
 				</th>
 				<td>
@@ -166,7 +173,18 @@
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row" class="db-tgcl-after-rowspan">
+				<th scope="row">
+					<?php _e( 'Underlined' , $d ) ?> <?php _e( 'on Hover' , $d ) ?>
+				</th>
+				<td>
+					<select type="text" name="underlined_hover" id="db_tgcl_underlined_hover">
+						<option value="1" <?php selected( $underlined_hover, '1' ); ?>><?php _e( 'Yes' , $d ) ?></option>
+						<option value="0" <?php selected( $underlined_hover, '0' ); ?>><?php _e( 'No' , $d ) ?></option>
+					</select>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">
 					<?php _e( 'Color' , $d ) ?>
 				</th>
 				<td id="db_tgcl_color_inner">
@@ -175,7 +193,7 @@
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row" class="db-tgcl-after-rowspan">
+				<th scope="row">
 					<?php _e( 'Color' , $d ) ?> <?php _e( 'on Hover' , $d ) ?>
 				</th>
 				<td id="db_tgcl_color_hover_inner">
@@ -184,7 +202,7 @@
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row" class="db-tgcl-after-rowspan">
+				<th scope="row">
 					<?php _e( 'Background Color' , $d ) ?>
 				</th>
 				<td id="db_tgcl_background_inner">
@@ -193,7 +211,7 @@
 				</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row" class="db-tgcl-after-rowspan">
+				<th scope="row">
 					<?php _e( 'Background Color' , $d ) ?> <?php _e( 'on Hover' , $d ) ?>
 				</th>
 				<td id="db_tgcl_background_hover_inner">

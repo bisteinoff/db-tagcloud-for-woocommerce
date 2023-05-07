@@ -3,7 +3,7 @@
 Plugin Name: DB Tagcloud for Woocommerce
 Plugin URI: https://github.com/bisteinoff/db-tagcloud-for-woocommerce
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.4.2
+Version: 1.5
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 Text Domain: db-tagcloud-for-woocommerce
@@ -32,8 +32,6 @@ License: GPL2
 
 	{
 
-		public $baseUrl;
-
 		function dbTagCloud()
 		{
 
@@ -42,6 +40,7 @@ License: GPL2
 			add_option('db_tagcloud_fontweight');
 			add_option('db_tagcloud_borderwidth');
 			add_option('db_tagcloud_underlined', '0');
+			add_option('db_tagcloud_underlined_hover', '0');
 			add_option('db_tagcloud_color');
 			add_option('db_tagcloud_color_hover');
 			add_option('db_tagcloud_background');
@@ -50,6 +49,10 @@ License: GPL2
 
 			if (function_exists ('add_shortcode') )
 			{
+
+				$multisite = $this->tag_multisite_id();
+				$prefix = $multisite[prefix];
+
 				add_shortcode('tagcloud', array(&$this, 'tag_cloud') );
 
 				add_filter( 'mce_buttons_2', array(&$this, 'mce_buttons') );
@@ -60,7 +63,7 @@ License: GPL2
 				wp_register_style('db-tagcloud', plugin_dir_url( __FILE__ ) . 'css/style.min.css');
 				wp_enqueue_style( 'db-tagcloud');
 
-				wp_register_style('db-tagcloud-custom', plugin_dir_url( __FILE__ ) . 'css/custom.min.css');
+				wp_register_style('db-tagcloud-custom', plugin_dir_url( __FILE__ ) . 'css/custom' . $prefix . '.min.css');
 				wp_enqueue_style( 'db-tagcloud-custom');
 
 				add_action( 'admin_menu', array (&$this, 'admin') );
@@ -72,16 +75,33 @@ License: GPL2
 				);
 				add_action( 'admin_footer', array (&$this, 'admin_footer_js') );
 				add_action( 'admin_footer', function() {
-								wp_enqueue_script( 'db-tagcloud-admin', plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'wp-color-picker' ), false, true );
+								wp_enqueue_script( 'db-tagcloud-admin', plugin_dir_url( __FILE__ ) . 'js/admin.min.js', array( 'wp-color-picker' ), false, true );
 								wp_enqueue_style( 'db-tagcloud', plugin_dir_url( __FILE__ ) . 'css/style.min.css');
 								wp_enqueue_style( 'wp-color-picker' );
-								wp_register_style('db-tagcloud-custom', plugin_dir_url( __FILE__ ) . 'css/custom.min.css', array(), date("d.g.is"), true);
+								wp_register_style('db-tagcloud-custom', plugin_dir_url( __FILE__ ) . 'css/custom' . $prefix . '.min.css', array(), date("d.g.is"), true);
 								wp_enqueue_style( 'db-tagcloud-custom');
 							},
 							99
 				);
 			}
 
+		}
+
+		function tag_multisite_id()
+		{
+			$sep = '-';
+			$data = array(
+				[id] => '',
+				[prefix] => ''
+			);
+
+			if ( is_multisite() )
+				{
+					$data[id] = get_current_blog_id();
+					$data[prefix] = $sep . $data[id];
+				}
+
+			return $data;
 		}
 
 		function tag_cloud($db_attribute)

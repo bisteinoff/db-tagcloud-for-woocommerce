@@ -1,41 +1,42 @@
 <?php
 
-	$db_css = '';
-	$db_link = plugin_dir_path( __FILE__ ) . 'custom.min.css';
-	$fontsize = esc_html ( get_option('db_tagcloud_fontsize') );
-	$fontweight = esc_html ( get_option('db_tagcloud_fontweight') );
-	$borderwidth = esc_html ( get_option('db_tagcloud_borderwidth') );
-	$color = sanitize_hex_color ( get_option('db_tagcloud_color') );
+	$db_css = "";
 
-	$db_css .= ".db-tagcloud li a {";
+	$db_tagcloud = new dbTagCloud();
+	$multisite = $db_tagcloud -> tag_multisite_id();
+	$prefix = $multisite[prefix];
+	$db_link = plugin_dir_path( __FILE__ ) . "custom{$prefix}.min.css";
 
-	if ( $fontsize > 0 )
-		$db_css .= "font-size:" . $fontsize . "px;";
+	$fontweight_values = array ( '400', '700', '400', '700' );
+	$fontstyle_values = array ( 'normal', 'normal', 'italic', 'italic' );
 
-	if ( $fontweight > 0 ) {
+	$db_css .=
 
-		switch ( $fontweight ) {
+		".db-tagcloud li a {" .
 
-			case 1 : $db_css .= "font-weight:700;";
-			break;
+			( $fontsize > 0 ? "font-size:{$fontsize}px;" : "" ) .
 
-			case 2 : $db_css .= "font-style:italic;";
-			break;
+			( $fontweight >= 0 && $fontweight <= 3 ? "font-weight:{$fontweight_values[$fontweight]};font-style:{$fontstyle_values[$fontweight]};" : "" ) .
 
-			case 3 : $db_css .= "font-weight:700;font-style:italic;";
-			break;
+			( $borderwidth !== '' && $borderwidth >= 0 ? "border-width:{$borderwidth}px;" : "" ) .
 
-		}
+			( $underlined === 1 ? "text-decoration:underline;" : "text-decoration:none;" ) .
 
-	}
+			( $color !== '' ? "border-color:{$color};color:{$color};" : "") .
 
-	if ( $borderwidth !== '' && $borderwidth >= 0 )
-		$db_css .= "border-width:" . $borderwidth . "px;";
+			( $background !== '' ? "background:{$background};" : "") .
 
-	if ( $color !== '' )
-		$db_css .= "border-color:{$color};color:{$color}";
+		"}" .
 
-	$db_css .= "}";
+		".db-tagcloud li a:hover {" .
+
+			( $underlined_hover === 1 ? "text-decoration:underline;" : "text-decoration:none;" ) .
+
+			( $color_hover !== '' ? "border-color:{$color_hover};color:{$color_hover};" : "") .
+
+			( $background_hover !== '' ? "background:{$background_hover};" : "") .
+
+		"}";
 
 	if ( file_exists ( $db_link ) )
 		wp_delete_file ( $db_link );

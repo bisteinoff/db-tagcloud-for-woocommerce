@@ -8,8 +8,9 @@ const dbTagcloudFontsize = document.getElementById("db_tgcl_fontsize");
 const dbTagcloudFontweight = document.getElementById("db_tgcl_fontweight");
 const dbTagcloudBorderwidth = document.getElementById("db_tgcl_borderwidth");
 const dbTagcloudUnderlined = document.getElementById("db_tgcl_underlined");
+const dbTagcloudUnderlinedHover = document.getElementById("db_tgcl_underlined_hover");
 const dbTagcloudColor = document.getElementById("db_tgcl_color");
-const dbTagcloudHover = document.getElementById("db_tgcl_color_hover");
+const dbTagcloudColorHover = document.getElementById("db_tgcl_color_hover");
 const dbTagcloudBackground = document.getElementById("db_tgcl_background");
 const dbTagcloudBackgroundHover = document.getElementById("db_tgcl_background_hover");
 
@@ -96,11 +97,34 @@ function dbNewBorderwidth() {
 function dbNewUnderlined() {
 
     let underlined = dbTagcloudUnderlined.value;
+    underlined = ( underlined === '1' ? "underline" : "none");
 
     for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
 
-       if ( underlined === 1 ) dbTagcloudPreviewAnchor.style.textDecoration = "underline";
-       else dbTagcloudPreviewAnchor.style.textDecoration = "none";
+        {
+            dbTagcloudPreviewAnchor.style.textDecoration = underlined;
+            dbTagcloudPreviewAnchor.addEventListener('mouseout', function()
+    
+                {
+                    dbTagcloudPreviewAnchor.style.textDecoration = underlined;
+                });
+        }
+
+}
+
+
+function dbNewUnderlinedHover() {
+
+    let underlined = dbTagcloudUnderlinedHover.value;
+    underlined = ( underlined === '1' ? "underline" : "none");
+
+    for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
+
+        dbTagcloudPreviewAnchor.addEventListener('mouseover', function()
+    
+            {
+                dbTagcloudPreviewAnchor.style.textDecoration = underlined;
+            });
 
 }
 
@@ -114,6 +138,8 @@ window.onload = function () {
     dbNewFontweight();
     dbNewBorderwidth();
     dbNewUnderlined();
+    dbNewUnderlinedHover();
+
     setTimeout( () => {
         dbTagcloudPreview.classList.remove("db-hidden");
         dbTagcloudPreloader.classList.add("db-hidden");
@@ -129,6 +155,7 @@ dbTagcloudFontsize.addEventListener('change', dbNewFontsize);
 dbTagcloudFontweight.addEventListener('change', dbNewFontweight);
 dbTagcloudBorderwidth.addEventListener('change', dbNewBorderwidth);
 dbTagcloudUnderlined.addEventListener('change', dbNewUnderlined);
+dbTagcloudUnderlinedHover.addEventListener('change', dbNewUnderlinedHover);
 
 
 
@@ -141,7 +168,8 @@ jQuery(document).ready(function($){
     $('.db-tgcl-background-hover').wpColorPicker();
 });
 
-/* Changing color */
+
+/* Color */
 
 Object.defineProperty(dbTagcloudColor, "value", {
     set: function (t) {
@@ -155,6 +183,13 @@ Object.defineProperty(dbTagcloudColor, "value", {
         {
             dbTagcloudPreviewAnchor.style.color = color;
             dbTagcloudPreviewAnchor.style.borderColor = color;
+
+            dbTagcloudPreviewAnchor.addEventListener('mouseout', function()
+    
+                {
+                    dbTagcloudPreviewAnchor.style.color = color;
+                    dbTagcloudPreviewAnchor.style.borderColor = color;
+                });
         }
        
     },
@@ -168,32 +203,36 @@ Object.defineProperty(dbTagcloudColor, "value", {
 });
 
 
+/* Color on Hover */
 
-Object.defineProperty(dbTagcloudHover, "value", {
+Object.defineProperty(dbTagcloudColorHover, "value", {
     set: function (t) {
        
-    dbTagcloudHover.setAttribute('value',t);
+    dbTagcloudColorHover.setAttribute('value',t);
 
-    let color = dbTagcloudHover.value;
+    let color = dbTagcloudColorHover.value;
 
     for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
 
-        {
-            dbTagcloudPreviewAnchor.style.color = color;
-            dbTagcloudPreviewAnchor.style.borderColor = color;
-        }
+        dbTagcloudPreviewAnchor.addEventListener('mouseover', function()
+
+            {
+                dbTagcloudPreviewAnchor.style.color = color;
+                dbTagcloudPreviewAnchor.style.borderColor = color;
+            });
        
     },
     
     get: function(){
 
-        return dbTagcloudHover.getAttribute('value');
+        return dbTagcloudColorHover.getAttribute('value');
 
     }
 
 });
 
 
+/* Background Color */
 
 Object.defineProperty(dbTagcloudBackground, "value", {
     set: function (t) {
@@ -205,10 +244,17 @@ Object.defineProperty(dbTagcloudBackground, "value", {
     for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
 
         {
-            dbTagcloudPreviewAnchor.style.color = color;
-            dbTagcloudPreviewAnchor.style.borderColor = color;
+
+            dbTagcloudPreviewAnchor.style.backgroundColor = color;
+    
+            dbTagcloudPreviewAnchor.addEventListener('mouseout', function()
+    
+                {
+                    dbTagcloudPreviewAnchor.style.backgroundColor = color;
+                });
+
         }
-       
+
     },
     
     get: function(){
@@ -220,6 +266,7 @@ Object.defineProperty(dbTagcloudBackground, "value", {
 });
 
 
+/* Background Color on Hover */
 
 Object.defineProperty(dbTagcloudBackgroundHover, "value", {
     set: function (t) {
@@ -230,13 +277,14 @@ Object.defineProperty(dbTagcloudBackgroundHover, "value", {
 
     for ( let dbTagcloudPreviewAnchor of dbTagcloudPreviewAnchors )
 
-        {
-            dbTagcloudPreviewAnchor.style.color = color;
-            dbTagcloudPreviewAnchor.style.borderColor = color;
-        }
+        dbTagcloudPreviewAnchor.addEventListener('mouseover', function()
+
+            {
+                dbTagcloudPreviewAnchor.style.backgroundColor = color;
+            });
        
     },
-    
+
     get: function(){
 
         return dbTagcloudBackgroundHover.getAttribute('value');
