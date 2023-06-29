@@ -3,14 +3,14 @@
 Plugin Name: DB Tagcloud for Woocommerce
 Plugin URI: https://github.com/bisteinoff/db-tagcloud-for-woocommerce
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.5
+Version: 1.5.1
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 Text Domain: db-tagcloud-for-woocommerce
 License: GPL2
 */
 
-/*  Copyright YEAR  PLUGIN_AUTHOR_NAME  (email : bisteinoff@gmail.com)
+/*  Copyright 2023  Denis BISTEINOV  (email : bisteinoff@gmail.com)
  
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -36,15 +36,15 @@ License: GPL2
 		{
 
 			add_option('db_tagcloud_cols', '5');
-			add_option('db_tagcloud_fontsize');
-			add_option('db_tagcloud_fontweight');
-			add_option('db_tagcloud_borderwidth');
+			add_option('db_tagcloud_fontsize', '14');
+			add_option('db_tagcloud_fontweight', '0');
+			add_option('db_tagcloud_borderwidth', '1');
 			add_option('db_tagcloud_underlined', '0');
 			add_option('db_tagcloud_underlined_hover', '0');
-			add_option('db_tagcloud_color');
-			add_option('db_tagcloud_color_hover');
-			add_option('db_tagcloud_background');
-			add_option('db_tagcloud_background_hover');
+			add_option('db_tagcloud_color', '#333333');
+			add_option('db_tagcloud_color_hover', '#666666');
+			add_option('db_tagcloud_background', '#ffffff');
+			add_option('db_tagcloud_background_hover', '#ffffff');
 
 
 			if (function_exists ('add_shortcode') )
