@@ -1,9 +1,7 @@
 (function()
 {
-    // Load plugin specific language pack
-    tinymce.PluginManager.requireLangPack('db-tagcloud');
 
-    tinymce.create('tinymce.plugins.dbTagCloudPlugin',
+    tinymce.create( 'tinymce.plugins.dbTagCloudPlugin',
         {
             /**
              * Initializes the plugin, this will be executed after the plugin has been created.
@@ -32,7 +30,7 @@
                     {
                         title : 'Tag Cloud',
                         cmd : 'mceTagCloud',
-                        image : url + '/img/wordcloud.svg'
+                        image : url + '/../img/icon.svg'
                     }
                 );
             },
@@ -65,11 +63,11 @@
                     author : 'Denis Bisteinov',
                     authorurl : 'https://bisteinoff.com',
                     infourl : 'https://bisteinoff.com',
-                    version : "1.0"
+                    version : "1.1"
                 };
             }
         });
 
     // Register plugin
-    tinymce.PluginManager.add('db-tagcloud', tinymce.plugins.dbTagCloudPlugin);
+    tinymce.PluginManager.add( dbTagCloudPluginFolder, tinymce.plugins.dbTagCloudPlugin );
 })();

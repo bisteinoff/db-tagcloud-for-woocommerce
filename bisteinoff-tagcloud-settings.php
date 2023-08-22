@@ -1,6 +1,9 @@
 <?php // THE SETTINGS PAGE
 
-	$d = 'db-tagcloud-for-woocommerce'; // domain for translate.wordpress.org
+	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+	$baseObj = new dbTagCloud();
+	$d = $baseObj -> thisdir(); // domain for translate.wordpress.org
 
 	$cols = (int) get_option('db_tagcloud_cols');
 	$fontsize = esc_html ( get_option('db_tagcloud_fontsize') );
@@ -23,50 +26,51 @@
 		if ( function_exists('check_admin_referrer') )
 			check_admin_referrer('db_tagcloud_form');
 
+
 		// Columns
-		$cols = (int) $_POST['cols'];
+		$cols = (int) esc_html ( sanitize_text_field ( $_POST['cols'] ) );
 		update_option( 'db_tagcloud_cols', $cols );
 
 		// Font size
-		if ( $_POST['fontsize'] !== '' )
-			$fontsize = (float) $_POST['fontsize'];
+		if ( !empty ( $_POST['fontsize'] ) )
+			$fontsize = (float) esc_html ( sanitize_text_field ( $_POST['fontsize'] ) );
 		else
 			$fontsize = '';
 		update_option ( 'db_tagcloud_fontsize', $fontsize );
 
 		// Font weight
-		$fontweight = (int) $_POST['fontweight'];
+		$fontweight = (int) esc_html ( sanitize_text_field ( $_POST['fontweight'] ) );
 		update_option ( 'db_tagcloud_fontweight', $fontweight );
 
 		// Border width
-		if ( $_POST['borderwidth'] !== '' )
-			$borderwidth = (float) $_POST['borderwidth'];
+		if ( !empty ( $_POST['borderwidth'] ) )
+			$borderwidth = (float) esc_html ( sanitize_text_field ( $_POST['borderwidth'] ) );
 		else
 			$borderwidth = '';
 		update_option ( 'db_tagcloud_borderwidth', $borderwidth );
 
 		// Underlined
-		$underlined = (int) $_POST['underlined'];
+		$underlined = (int) esc_html ( sanitize_text_field ( $_POST['underlined'] ) );
 		update_option ( 'db_tagcloud_underlined', $underlined );
 
 		// Underlined on Hover
-		$underlined_hover = (int) $_POST['underlined_hover'];
+		$underlined_hover = (int) esc_html ( sanitize_text_field ( $_POST['underlined_hover'] ) );
 		update_option ( 'db_tagcloud_underlined_hover', $underlined_hover );
 
 		// Color
-		$color = sanitize_hex_color ( $_POST['color'] );
+		$color = esc_html ( sanitize_hex_color ( $_POST['color'] ) );
 		update_option( 'db_tagcloud_color', $color );
 
 		// Color on Hover
-		$color_hover = sanitize_hex_color ( $_POST['color_hover'] );
+		$color_hover = esc_html ( sanitize_hex_color ( $_POST['color_hover'] ) );
 		update_option( 'db_tagcloud_color_hover', $color_hover );
 
 		// Background Color
-		$background = sanitize_hex_color ( $_POST['background'] );
+		$background = esc_html ( sanitize_hex_color ( $_POST['background'] ) );
 		update_option( 'db_tagcloud_background', $background );
 
 		// Background Color on Hover
-		$background_hover = sanitize_hex_color ( $_POST['background_hover'] );
+		$background_hover = esc_html ( sanitize_hex_color ( $_POST['background_hover'] ) );
 		update_option( 'db_tagcloud_background_hover', $background_hover );
 
 		require_once('css/custom.php');
@@ -84,7 +88,7 @@
 
 	<h2><?php _e( 'Settings', $d ); ?></h2>
 
-	<form name="db-tagcloud" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>?page=db-tagcloud&amp;updated=true">
+	<form name="db-tagcloud" method="post" action="<?php echo esc_html ( $_SERVER['PHP_SELF'] ); ?>?page=<?php echo esc_html ( $d ) ?>&amp;updated=true">
 
 		<?php
 			if (function_exists ('wp_nonce_field') )
@@ -259,7 +263,7 @@
 			</tr>
 			<?php
 			$db_woo_attributes =  wc_get_attribute_taxonomies();
-			if ($db_woo_attributes)
+			if ( $db_woo_attributes )
 				foreach ( $db_woo_attributes as $db_woo_attribute )
 					echo "<tr><td>{$db_woo_attribute->attribute_label}</td><td><code>{$db_woo_attribute->attribute_name}</code></td></tr>";
 			?>
