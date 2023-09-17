@@ -11,6 +11,7 @@
 .db-tagcloud li {
     display: inline-block;
     line-height: 2.5;
+    margin: 2px 5px;
     padding: 0 5px;
     }
 

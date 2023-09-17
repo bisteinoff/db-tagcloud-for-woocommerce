@@ -3,7 +3,7 @@
 Plugin Name: DB Tagcloud for Woocommerce
 Plugin URI: https://github.com/bisteinoff/db-tagcloud-for-woocommerce
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.6
+Version: 1.7
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 Text Domain: db-tagcloud-for-woocommerce
@@ -42,7 +42,7 @@ License: GPL2
 		public function __construct()
 		{
 
-			add_option('db_tagcloud_cols', '5');
+			add_option('db_tagcloud_cols', '0');
 			add_option('db_tagcloud_fontsize', '14');
 			add_option('db_tagcloud_fontweight', '0');
 			add_option('db_tagcloud_borderwidth', '1');
@@ -163,8 +163,8 @@ License: GPL2
 				$icon = $svg -> saveHTML( $svg -> getElementsByTagName('svg')[0] );
 
 				add_menu_page(
-					__( 'DB Tag Cloud Settings' , $this -> thisdir() ),
-					__( 'DB Tag Cloud' , $this -> thisdir() ),
+					__( 'DB Tag Cloud Settings' , 'db-tagcloud-for-woocommerce' ),
+					__( 'DB Tag Cloud' , 'db-tagcloud-for-woocommerce' ),
 					'manage_options',
 					$this -> thisdir(),
 					array (&$this, 'admin_page_callback'),
@@ -209,8 +209,8 @@ License: GPL2
 
 			?>
 				<script type="text/javascript">
-					let dbTagCloudPluginFolder = '<?php echo $this -> thisdir(); ?>';
-					let dbTagCloudCols = <?php echo $cols; ?>;
+					let dbTagCloudPluginFolder = '<?php echo esc_html ( sanitize_text_field ( $this -> thisdir() ) ) ?>';
+					let dbTagCloudCols = <?php echo esc_html ( sanitize_text_field ( $cols ) ) ?>;
 				</script>
 			<?php
 			
