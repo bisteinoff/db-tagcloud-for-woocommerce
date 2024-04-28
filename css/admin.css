@@ -19,6 +19,11 @@ code {
     margin: .5em 0;
 }
 
+.db-tgcl-admin .db-tagcloud-logo {
+    float: right;
+    margin: 15px 0 15px 15px;
+}
+
 .db-tgcl-admin .db-tgcl-table {
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;

@@ -3,14 +3,14 @@
 Plugin Name: DB Tagcloud for Woocommerce
 Plugin URI: https://github.com/bisteinoff/db-tagcloud-for-woocommerce
 Description: The plugin helps to make a tag cloud for Woocommerce category pages using a shortcode that is highly beneficial for optimizing your website for Google, Bing, Yandex and other search engines (SEO)
-Version: 1.7
+Version: 1.8
 Author: Denis Bisteinov
 Author URI: https://bisteinoff.com
 Text Domain: db-tagcloud-for-woocommerce
 License: GPL2
 */
 
-/*  Copyright 2023  Denis BISTEINOV  (email : bisteinoff@gmail.com)
+/*  Copyright 2024  Denis BISTEINOV  (email : bisteinoff@gmail.com)
  
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -26,11 +26,11 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	// Example: [tagcloud attr="color" cols="5"]
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! class_exists( 'DBPL_TagCloud' ) ) :
 
-	class dbTagCloud
+	class DBPL_TagCloud
 
 	{
 
@@ -163,8 +163,8 @@ License: GPL2
 				$icon = $svg -> saveHTML( $svg -> getElementsByTagName('svg')[0] );
 
 				add_menu_page(
-					__( 'DB Tag Cloud Settings' , 'db-tagcloud-for-woocommerce' ),
-					__( 'DB Tag Cloud' , 'db-tagcloud-for-woocommerce' ),
+					esc_html__( 'DB Tag Cloud Settings' , 'db-tagcloud-for-woocommerce' ),
+					esc_html__( 'DB Tag Cloud' , 'db-tagcloud-for-woocommerce' ),
 					'manage_options',
 					$this -> thisdir(),
 					array (&$this, 'admin_page_callback'),
@@ -192,7 +192,7 @@ License: GPL2
 				get_admin_url() . 'admin.php'
 			) );
 
-			$settings_link = "<a href='$url'>" . __( 'Settings' ) . '</a>';
+			$settings_link = "<a href='$url'>" . esc_html__( 'Settings' ) . '</a>';
 
 			array_push(
 				$links,
@@ -218,4 +218,6 @@ License: GPL2
 
 	}
 
-	$db_tagcloud = new dbTagCloud();
+	$db_tagcloud = new DBPL_TagCloud();
+
+endif;

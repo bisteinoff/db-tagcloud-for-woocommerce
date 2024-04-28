@@ -4,7 +4,7 @@
 
 	$db_css = "";
 
-	$db_tagcloud = new dbTagCloud();
+	$db_tagcloud = new DBPL_TagCloud();
 	$multisite = $db_tagcloud -> tag_multisite_id();
 	$prefix = $multisite[prefix];
 	$db_link = plugin_dir_path( __FILE__ ) . "custom{$prefix}.min.css";
