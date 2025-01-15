@@ -3,8 +3,8 @@ Contributors: bisteinoff
 Donate link: https://bisteinoff.com
 Tags: woocommerce, tagcloud, seo
 Requires at least: 4.6
-Tested up to: 6.5
-Stable tag: 1.8
+Tested up to: 6.7
+Stable tag: 1.9
 License: GPL2
 
 The plugin helps to easily make a tag cloud of pages for any Woocommerce attribute using a shortcode that is highly beneficial for SEO optimization.
@@ -32,6 +32,17 @@ If you use TinyMCE editor, there is a button "Tag Cloud" at the end of the 2nd b
 A tagcloud helps to improve the linking between attribute categories pages of your e-commerce website.
 
 == Changelog ==
+
+= 1.9 =
+* Compatible with Wordpress 6.7
+* Veryfied with Plugin Check
+* Fix: Functions `wp_register_style` and `wp_enqueue_style` were called incorrectly
+* Fix: Check if class `DOMDocument` exists for the SVG icon, else use a dashicon
+* Fix: Remove an old nonce function that was no longer used
+* Fix: Possibly undefined superglobal array index
+* Security: Use of function `wp_unslash()` to unslash POST variables
+* Security: Remove `$_SERVER[ 'PHP_SELF' ]` in the admin form
+* Security: Fixed escape functions for several outputs
 
 = 1.8 =
 * Compatible with Wordpress 6.5
